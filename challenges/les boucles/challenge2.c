@@ -7,7 +7,7 @@ int n;
 float i,f;
 
 printf("veuillez entrer un nombre positif ");
-    scanf("%d",&n);
+scanf("%d",&n);
 
     if(n<0){
     printf("veuillez entrer un nombre positif ");
