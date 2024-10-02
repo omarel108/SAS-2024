@@ -29,6 +29,40 @@ void addContact() {
     printf("Contact ajoute avec succes \n");
 }
 
+void modifyContact() {
+    char modify_name[100];
+    printf("Entrez le nom du contact a modifier : ");
+    scanf(" %[^\n]", modify_name);
+
+    for (int i = 0; i < contact_count; i++) {
+        if (strcmp(contacts[i].name, modify_name) == 0) {
+            printf("Entrez le nouveau numero de telephone : ");
+            scanf(" %[^\n]", contacts[i].phone);
+            printf("Entrez la nouvelle adresse e-mail : ");
+            scanf(" %[^\n]", contacts[i].email);
+            printf("Contact modifie avec succes !\n");
+            return;
+        }
+    }
+    printf("Contact non trouve.\n");
+}
+
+void deleteContact() {
+    char delete_name[100];
+    printf("Entrez le nom du contact a supprimer : ");
+    scanf(" %[^\n]", delete_name);
+
+    for (int i = 0; i < contact_count; i++) {
+        if (strcmp(contacts[i].name, delete_name) == 0) {
+            contacts[i] = contacts[contact_count - 1];
+            contact_count--;
+            printf("Contact supprime avec succes !\n");
+            return;
+        }
+    }
+    printf("Contact non trouve.\n");
+}
+
 void displayContacts() {
     if (contact_count == 0) {
         printf("Aucun contact disponible.\n");
@@ -60,50 +94,16 @@ void searchContact() {
     printf("Contact non trouve.\n");
 }
 
-void modifyContact() {
-    char modify_name[100];
-    printf("Entrez le nom du contact à modifier : ");
-    scanf(" %[^\n]", modify_name);
-
-    for (int i = 0; i < contact_count; i++) {
-        if (strcmp(contacts[i].name, modify_name) == 0) {
-            printf("Entrez le nouveau numero de telephone : ");
-            scanf(" %[^\n]", contacts[i].phone);
-            printf("Entrez la nouvelle adresse e-mail : ");
-            scanf(" %[^\n]", contacts[i].email);
-            printf("Contact modifie avec succes !\n");
-            return;
-        }
-    }
-    printf("Contact non trouve.\n");
-}
-
-void deleteContact() {
-    char delete_name[100];
-    printf("Entrez le nom du contact à supprimer : ");
-    scanf(" %[^\n]", delete_name);
-
-    for (int i = 0; i < contact_count; i++) {
-        if (strcmp(contacts[i].name, delete_name) == 0) {
-            contacts[i] = contacts[contact_count - 1];
-            contact_count--;
-            printf("Contact supprime avec succes !\n");
-            return;
-        }
-    }
-    printf("Contact non trouve.\n");
-}
-
 int main() {
     int choice;
 
     do {
         printf("\nMenu de gestion de contacts :\n");
         printf("1. Ajouter un contact\n");
-        printf("2. Afficher tous les contacts\n");
-        printf("3. Rechercher un contact\n");
-        printf("4. Modifier un contact\n");
-        printf("5. Supprimer un contact\n");
+        printf("2. Modifier un contact\n");
+        printf("3. Supprimer un contact\n");
+        printf("4. Afficher tous les contacts\n");
+        printf("5. Rechercher un contact\n");
         printf("6. Quitter\n");
         printf("Choisissez une option : ");
         scanf("%d", &choice);
@@ -113,28 +113,24 @@ int main() {
                 addContact();
                 break;
             case 2:
-                displayContacts();
+                 modifyContact();
                 break;
             case 3:
-                searchContact();
+                deleteContact();
                 break;
             case 4:
-                modifyContact();
+                displayContacts();
                 break;
             case 5:
-                deleteContact();
+                searchContact();
                 break;
             case 6:
                 printf("Au revoir !\n");
                 break;
             default:
-                printf("Option invalide. Veuillez ressayer.\n");
+                printf("Option invalide Veuillez ressayer\n");
         }
     } while (choice != 6);
 
     return 0;
 }
-
-
-
-
